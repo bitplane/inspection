@@ -42,6 +42,7 @@ echo
 
 CHECK_TOOL git       "Version Control"       "HOW DO YOU EXPECT TO SURVIVE WITHOUT VERSION CONTROL?"
 CHECK_TOOL cc        "C Compiler"            "CAN YOU WRITE MACHINE CODE? WHERE IS YOUR COMPILER?"
+CHECK_TOOL make      "GNU Make"              "DOES YOUR MAMMA MAKE FOR YOU? INSTALL MAKE RIGHT NOW!"
 CHECK_TOOL tmux      "Terminal Multiplexer"
 CHECK_TOOL vim       "Text Editor"           "ARE YOU AN EMACS?"
 CHECK_TOOL python3   "Python"                "DO SNAKES SCARE YOU? INSTALL PYTHON RIGHT NOW!" 
