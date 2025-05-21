@@ -5,7 +5,7 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-STATUS=0
+MISSING=""
 
 INSULT() {
     printf "$RED"
@@ -17,7 +17,7 @@ WHAT IS THIS MICKY MOUSE SHIT?
 WHAT IS YOUR MAJOR MALFUNCTION, NUMBNUTS?
 EOF
 )
-    printf "$NC\n\n"
+    printf "$NC\n"
 }
 
 CHECK_TOOL() {
@@ -25,42 +25,53 @@ CHECK_TOOL() {
     local description="$2"
     local comment="${3:-WHERE IS YOUR $(echo $description | tr [:lower:] [:upper:])?}"
     
-    printf "%-20s" "$tool"
+    printf "%-20s" "$tool"                      >&2
     
     if command -v "$tool" >/dev/null 2>&1; then
-        echo -e "${GREEN}SIR, YES SIR!${NC}"
+        echo -e "${GREEN}SIR, YES SIR!${NC}"    >&2
         return 0
     else
-        echo -e "${RED}$comment${NC}"
-        STATUS=1
+        echo -e "${RED}$comment${NC}"           >&2
+        MISSING="$MISSING $tool"
         return 1
     fi
 }
 
-echo -e "${YELLOW}SHORT ARM INSPECTION${NC}"
-echo
+echo -e "${YELLOW}SHORT ARM INSPECTION${NC}"    >&2
+echo                                            >&2
 
+# Soure control + compilers
 CHECK_TOOL git       "Version Control"       "HOW DO YOU EXPECT TO SURVIVE WITHOUT VERSION CONTROL?"
 CHECK_TOOL cc        "C Compiler"            "CAN YOU WRITE MACHINE CODE? WHERE IS YOUR COMPILER?"
 CHECK_TOOL make      "GNU Make"              "DOES YOUR MAMMA MAKE FOR YOU? INSTALL MAKE RIGHT NOW!"
-CHECK_TOOL tmux      "Terminal Multiplexer"
-CHECK_TOOL vim       "Text Editor"           "ARE YOU AN EMACS COMMIE? INSTALL VIM RIGHT NOW."
+
+# Editor
+CHECK_TOOL vim       "Text Editor"           "ARE YOU AN EMACS COMMIE OR DO YOU USE NANO?"
+
+# Python tooling
 CHECK_TOOL python3   "Python"                "DO SNAKES SCARE YOU? INSTALL PYTHON RIGHT NOW!" 
 CHECK_TOOL uv        "uv"                    "DO YOU SUCK CONDA? INSTALL UV IMMEDIATELY"
-CHECK_TOOL asciinema "Terminal Recorder"
-CHECK_TOOL magick    "Image converter"
 CHECK_TOOL ruff      "Python formatter"
-CHECK_TOOL mediainfo "Media investigator"
+
+# terminal stuff
+CHECK_TOOL tmux      "Terminal Multiplexer"
+CHECK_TOOL asciinema "Terminal Recorder"
 CHECK_TOOL chafa     "Image viewer"
 
-echo
+# 
+CHECK_TOOL magick    "Image converter"
+CHECK_TOOL mediainfo "Media investigator"
+CHECK_TOOL ffmpeg    "Video converter"
+CHECK_TOOL sox       "Audio converter"       "HANDS OFF COCKS ON SOX"
 
 
-if [[ "$STATUS" -eq "0" ]]; then
-    echo -e "${GREEN}YOU ARE GREEN TO GO.${NC}"
+echo                                            >&2
+if [[ -z "$MISSING" ]]; then
+    echo -e "${GREEN}YOU ARE GREEN TO GO.${NC}" >&2
     exit 0
 else
-    INSULT
-    exit $STATUS
+    INSULT                                      >&2
+    echo "missing:$MISSING"
+    exit 1
 fi
 
