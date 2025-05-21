@@ -43,11 +43,14 @@ echo
 CHECK_TOOL git       "Version Control"       "HOW DO YOU EXPECT TO SURVIVE WITHOUT VERSION CONTROL?"
 CHECK_TOOL cc        "C Compiler"            "CAN YOU WRITE MACHINE CODE? WHERE IS YOUR COMPILER?"
 CHECK_TOOL tmux      "Terminal Multiplexer"
-CHECK_TOOL vim       "Text Editor"           "DO YOU LIKE MOUSE MITTENS OR ARE YOU AN EMACS?"
-CHECK_TOOL python3   "Python"                "ARE YOU SCARED OF SNAKES? INSTALL PYTHON RIGHT NOW!" 
+CHECK_TOOL vim       "Text Editor"           "ARE YOU AN EMACS?"
+CHECK_TOOL python3   "Python"                "DO SNAKES SCARE YOU? INSTALL PYTHON RIGHT NOW!" 
 CHECK_TOOL uv        "uv"                    "I BET YOU'RE THE KIND OF PERSON WHO WOULD USE CONDA"
 CHECK_TOOL asciinema "Terminal Recorder"
-CHECK_TOOL magick    ""
+CHECK_TOOL magick    "Image converter"
+CHECK_TOOL ruff      "Python formatter"
+CHECK_TOOL mediainfo "Media investigator"
+CHECK_TOOL chafa     "Image viewer"
 
 echo
 

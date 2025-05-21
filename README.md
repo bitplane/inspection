@@ -1,4 +1,4 @@
-# tmux setup
+# inspection
 
 ```
 THIS IS MY CONSOLE. THERE ARE MANY LIKE IT BUT THIS ONE'S MINE. MY CONSOLE IS MY
