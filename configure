@@ -17,7 +17,7 @@ WHAT IS THIS MICKY MOUSE SHIT?
 WHAT IS YOUR MAJOR MALFUNCTION, NUMBNUTS?
 EOF
 )
-    printf "$NC\n"
+    printf "$NC\n\n"
 }
 
 CHECK_TOOL() {
@@ -54,6 +54,7 @@ CHECK_TOOL mediainfo "Media investigator"
 CHECK_TOOL chafa     "Image viewer"
 
 echo
+
 
 if [[ "$STATUS" -eq "0" ]]; then
     echo -e "${GREEN}YOU ARE GREEN TO GO.${NC}"

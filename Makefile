@@ -1,4 +1,4 @@
 inspection:
-	./configure
+	@./configure
 
 .PHONY: inspection
