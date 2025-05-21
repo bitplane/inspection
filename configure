@@ -1,0 +1,61 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+STATUS=0
+
+INSULT() {
+    printf "$RED"
+    head -n1 < <(shuf <<EOF
+YOU ARE A NON-HACKER WHO DOES NOT PACK THE GEAR TO SERVE IN MY BELOVED SHELL!
+YOU ARE NOTHING BUT AN UNORGANIZED GRAB-ASSTIC PIECE OF AMPHIBIAN SHIT!
+YOU ARE NOT EVEN A HUMAN BEING
+WHAT IS THIS MICKY MOUSE SHIT?
+WHAT IS YOUR MAJOR MALFUNCTION, NUMBNUTS?
+EOF
+)
+    printf "$NC\n"
+}
+
+CHECK_TOOL() {
+    local tool="$1"
+    local description="$2"
+    local comment="${3:-WHERE IS YOUR $(echo $description | tr [:lower:] [:upper:])?}"
+    
+    printf "%-20s" "$tool"
+    
+    if command -v "$tool" >/dev/null 2>&1; then
+        echo -e "${GREEN}SIR, YES SIR!${NC}"
+        return 0
+    else
+        echo -e "${RED}$comment${NC}"
+        STATUS=1
+        return 1
+    fi
+}
+
+echo -e "${YELLOW}SHORT ARM INSPECTION${NC}"
+echo
+
+CHECK_TOOL git       "Version Control"       "HOW DO YOU EXPECT TO SURVIVE WITHOUT VERSION CONTROL?"
+CHECK_TOOL cc        "C Compiler"            "CAN YOU WRITE MACHINE CODE? WHERE IS YOUR COMPILER?"
+CHECK_TOOL tmux      "Terminal Multiplexer"
+CHECK_TOOL vim       "Text Editor"           "DO YOU LIKE MOUSE MITTENS OR ARE YOU AN EMACS?"
+CHECK_TOOL python3   "Python"                "ARE YOU SCARED OF SNAKES? INSTALL PYTHON RIGHT NOW!" 
+CHECK_TOOL uv        "uv"                    "I BET YOU'RE THE KIND OF PERSON WHO WOULD USE CONDA"
+CHECK_TOOL asciinema "Terminal Recorder"
+CHECK_TOOL magick    ""
+
+echo
+
+if [[ "$STATUS" -eq "0" ]]; then
+    echo -e "${GREEN}YOU ARE GREEN TO GO.${NC}"
+    exit 0
+else
+    INSULT
+    exit $STATUS
+fi
+
