@@ -57,13 +57,22 @@ CHECK_TOOL ruff      "Python formatter"
 CHECK_TOOL tmux      "Terminal Multiplexer"
 CHECK_TOOL asciinema "Terminal Recorder"
 CHECK_TOOL chafa     "Image viewer"
+CHECK_TOOL figlet    "Banner alternative"
+CHECK_TOOL toilet    "Modern banner"         "YOU'RE ON LATRINE DUTY"
+CHECK_TOOL viddy     "Command watcher"
 
-# 
+# Text tools
+CHECK_TOOL markdown  "Markdown converter"
+CHECK_TOOL jq        "JSON parser"
+
+# media tools
 CHECK_TOOL magick    "Image converter"
 CHECK_TOOL mediainfo "Media investigator"
 CHECK_TOOL ffmpeg    "Video converter"
 CHECK_TOOL sox       "Audio converter"       "HANDS OFF COCKS ON SOX"
 
+# container stuff
+CHECK_TOOL podman    "Container manager"
 
 echo                                            >&2
 if [[ -z "$MISSING" ]]; then
